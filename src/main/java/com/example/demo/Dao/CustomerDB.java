@@ -25,9 +25,9 @@ public class CustomerDB implements CustomerOperation {
 
 
     @Override
-    public void updatePassword(String id, String password) {
+    public void updatePassword(String name, String password) {
         customerDb.stream()
-                .filter(owner -> owner.getUserId().equals(id))
+                .filter(owner -> owner.getName().equals(name))
                 .findFirst()
                 .get().updatePassword(password);
     }

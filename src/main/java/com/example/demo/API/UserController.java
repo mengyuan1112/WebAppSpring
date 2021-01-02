@@ -11,22 +11,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@RequestMapping("api/user")
-@RestController
-public class UserController {
 
+@RequestMapping("/login")
+@RestController
+@CrossOrigin(origins = "http://localhost:3000")
+public class UserController {
+    private final OwnerService ownerService;
+    private final CustomerService customerService;
 
     @Autowired
-    final OwnerService ownerService;
-    final CustomerService customerService;
     public UserController(OwnerService ownerService, CustomerService customerService) {
         this.ownerService = ownerService;
         this.customerService = customerService;
     }
 
-    @PostMapping("customer")
+    @PostMapping("/customer")
     public void addCustomer(@RequestBody Customer customer){
         this.customerService.addCustomer(customer);
+        System.out.println(customer.getName());
     }
 
     @PostMapping("owner")
@@ -45,10 +47,10 @@ public class UserController {
     }
 
     // PatchMapping using for update
-    @PatchMapping(path = "owner/{id}/changePassword")
-    public void changePassword(@PathVariable String id, @RequestBody Map<String,String> password){
-        password.forEach((k,v) -> {
-            ownerService.updatePassword(id,v);
-        });
-    }
+//    @PatchMapping(path = "owner/{id}/changePassword")
+//    public void changePassword(@PathVariable String id, @RequestBody Map<String,String> password){
+//        password.forEach((k,v) -> {
+//            ownerService.updatePassword(id,v);
+//        });
+//    }
 }

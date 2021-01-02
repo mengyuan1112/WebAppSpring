@@ -25,9 +25,9 @@ public class OwnerDB implements OwnerOperation{
 
 
     @Override
-    public void updatePassword(String id, String password) {
+    public void updatePassword(String name, String password) {
         ownerDb.stream()
-                .filter(owner -> owner.getUserId().equals(id))
+                .filter(owner -> owner.getName().equals(name))
                 .findFirst()
                 .get().updatePassword(password);
     }
